@@ -15,12 +15,7 @@ public class UserService {
 	// 1번 로그인 성공, 2번 비번 틀림, 3번 아이디 없음
 	public int login(UserVO param) {
 		UserVO selUser = mapper.getUser(param);
-		if(selUser == null || param.getUid() != selUser.getUid()) {
-			return 3;
-		}
-		if(param.getUpw() != selUser.getUpw()){
-			return 2;
-		}
-		return 1; 
+		if(selUser == null) { return 3; }
+		return !param.getUpw().equals(selUser.getUpw()) ? 2 : 1;
 	}
 }
